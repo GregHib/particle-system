@@ -2,7 +2,8 @@ package gregs.world.sys.node.nodes.emit.emitters
 
 import gregs.world.Point
 import gregs.world.sys.node.Node
-import gregs.world.sys.node.nodes.particle.particles.TemporaryParticle
+import gregs.world.sys.node.nodes.particle.particles.ColourParticle
+import javafx.scene.paint.Color
 
 class Rocket(x: Double, y: Double, xVelocity: Double, speed: Double) : TemporaryEmitter(x, y, Point(xVelocity, -speed)) {
     override var lifeSpan = 120
@@ -10,10 +11,10 @@ class Rocket(x: Double, y: Double, xVelocity: Double, speed: Double) : Temporary
     override fun emit(): ArrayList<Node> {
         val list = arrayListOf<Node>()
         if(lifeSpan > 2) {
-            list.add(TemporaryParticle(x, y, getStartVelocity(), acceleration, 50))//Trail of 1 particle a frame
+            list.add(ColourParticle(x, y, getStartVelocity(), acceleration, 40, Color.ORANGE, Color.RED))//Trail of 1 particle a frame
         } else if(lifeSpan == 1) {
             for(i in 0..1000)
-                list.add(TemporaryParticle(x, y, getStartVelocity(), acceleration, 80))//Explosion
+                list.add(ColourParticle(x, y, getStartVelocity(), acceleration, 70, Color.BLUE, Color.PURPLE))//Explosion
         }
         return list
     }

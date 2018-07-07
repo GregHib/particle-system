@@ -21,7 +21,6 @@ class SystemList<T: Node>(private val root: Pane) : ArrayList<T>() {
             if(node is NodeRotation)
                 node.display()
 
-
             //Handle removal
             if(node is NodeLife) {
 

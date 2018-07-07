@@ -4,40 +4,35 @@ import gregs.world.sys.ParticleSystem
 import gregs.world.sys.node.nodes.emit.emitters.FireworkDisplay
 import javafx.animation.AnimationTimer
 import javafx.scene.control.Label
+import javafx.scene.paint.Color
 import tornadofx.View
 import tornadofx.label
 import tornadofx.pane
+import tornadofx.rectangle
 
 
 class MainView : View() {
     private lateinit var label: Label
 
-    private val frameRate = FrameRate()
+    companion object {
+        val frameRate = FrameRate()
+    }
 
     override val root = pane {
+        rectangle (0.0, 0.0, 600.0, 600.0){
+            fill = Color.BLACK
+        }
         setPrefSize(600.0, 600.0)
 
-        label = label()
+        label = label {
+            textFill = Color.WHITE
+        }
     }
 
     private val system = ParticleSystem(root)
 
     init {
 
-        /*
-        TODO emitter of emitters? (Needs a different name)
-        For fireworks.
-        One emitter creates an emitter (rocket) which has a trail, moves up, then disappears
-
-        Either
-
-        Upon disappearing the emitter spawns a new emitter (temp) which handles explosions
-
-        Or
-
-        The emitter changes it's type (from rocket trail to explosion), so one emitter handles a type class which changed after a set time?
-
-        */
         /*val path = Path()
         path.elements.add(MoveTo(20.0, 20.0))
         path.elements.add(CubicCurveTo(30.0, 10.0, 380.0, 120.0, 200.0, 120.0))
@@ -61,6 +56,7 @@ class MainView : View() {
 
 //        system.addInteractiveNode(EmitterFactory.makeEmitter(EmitterType.PULSE, 200.0, 150.0))
 //        system.addInteractiveNode(EmitterFactory.makeEmitter(EmitterType.EMITTER, 400.0, 150.0))
+//        system.addNode(ColourParticle(300.0, 500.0, Point(0.0, 0.0), Point(0.0, -1.0), 80, Color.BLUE, Color.RED))
         system.addNode(FireworkDisplay(300.0, 500.0))
 //        system.addInteractiveNode(EmitterFactory.makeEmitter(EmitterType.ROCKET, 400.0, 600.0))
 
