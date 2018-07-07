@@ -36,7 +36,9 @@ class SystemList<T: Node>(private val root: Pane) : ArrayList<T>() {
                 }
             } else if(node is NodeMovement) {
                 //Remove if outside view
-                if(node.x < 0.0 || node.y < 0.0 || node.x > root.width || node.y > root.height) {
+                val x = node.translateX + node.x
+                val y = node.translateY + node.y
+                if(x < 0.0 || y < 0.0 || x > root.width || y > root.height) {
                     //Remove particle from view and list
                     root.children.remove(node)
                     iterator.remove()

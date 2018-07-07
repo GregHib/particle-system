@@ -14,7 +14,7 @@ open class Emitter(x: Double, y: Double) : Node(x, y, 2.0, 2.0) {
     }
 
     open fun emit(): ArrayList<Node> {
-        return arrayListOf(ParticleFactory.makeParticle(ParticleType.MOVEMENT, x, y, getStartVelocity()))
+        return arrayListOf(ParticleFactory.makeParticle(ParticleType.MOVEMENT, translateX + x, translateY + y, getStartVelocity()))
     }
 
     open fun emitting(): Boolean {

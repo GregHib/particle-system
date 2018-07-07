@@ -7,12 +7,18 @@ import gregs.world.sys.node.nodes.emit.Emitter
 import gregs.world.sys.node.nodes.force.forces.Attract
 import gregs.world.sys.node.nodes.force.forces.Repel
 import gregs.world.sys.node.nodes.particle.Particle
+import gregs.world.ui.FrameRate
 import gregs.world.ui.MouseGestures
+import javafx.animation.AnimationTimer
 import javafx.scene.layout.Pane
 
 class ParticleSystem(private val root: Pane) {
 
-    private val gravity = Point(0.0, 0.01)
+    companion object {
+        val frameRate = FrameRate()
+    }
+
+    private val gravity = Point(0.0, 0.0)
 
     var particles = SystemList<Particle>(root)
     var attractors = SystemList<Attract>(root)
@@ -20,6 +26,17 @@ class ParticleSystem(private val root: Pane) {
     var emitters = SystemList<Emitter>(root)
 
     private var mouseGestures = MouseGestures()
+
+    init {
+        val timer = object : AnimationTimer() {
+            override fun handle(now: Long) {
+                tick()
+
+                frameRate.update(now)
+            }
+        }
+        timer.start()
+    }
 
     fun addInteractiveNode(node: Node) {
         addNode(node)

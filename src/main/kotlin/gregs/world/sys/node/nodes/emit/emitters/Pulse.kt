@@ -11,7 +11,7 @@ open class Pulse(x: Double, y: Double, private val delay: Int) : Emitter(x, y) {
     override fun emit(): ArrayList<Node> {
         val list = arrayListOf<Node>()
         for(i in 0..100)
-            list.add(ParticleFactory.makeParticle(ParticleType.MOVEMENT, x, y, getStartVelocity()))
+            list.add(ParticleFactory.makeParticle(ParticleType.MOVEMENT, translateX + x, translateY + y, getStartVelocity()))
         return list
     }
 
